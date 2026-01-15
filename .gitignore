@@ -1,0 +1,19 @@
+# Binaries for programs and plugins
+*.exe
+*.o
+*.so
+*.dll
+*.dylib
+ctxb
+main
+
+# Test binaries
+*_test
+
+# Editor directories and files
+.idea/
+.vscode/
+.DS_Store
+
+# Package management
+vendor/
