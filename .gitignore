@@ -1,20 +1,35 @@
-# Binaries for programs and plugins
-*.exe
-*.o
-*.so
-*.dll
-*.dylib
-ctxb
-main
+# --- Go Binaries & Build Artifacts ---
+# ビルドされたバイナリ
+/ctxb
+/ctxb.exe
 
-# Test binaries
-*_test
+# テスト生成物など
+*.test
+*.out
+*.prof
 
-# Editor directories and files
-.idea/
-.vscode/
+# --- OS Specific ---
 .DS_Store
+Thumbs.db
 
-# Package management
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+
+# --- ctxb Generated Files ---
+# 生成されるHTMLレポートは成果物なのでGitに入れない
+ctxb-report.html
+
+# エクスポートされたAI用コンテキスト
+# ※ チームで共有したい場合はここをコメントアウトしてGit管理下に置いてください
+.cursorrules
+CLAUDE.md
+
+# --- Dependencies (Modules) ---
+# 基本的に vendor ディレクトリは管理しません（go.sum で管理するため）
 vendor/
-go.sum
+
+# --- Gemini CLI ---
+.gemini/
+AGENTS.md

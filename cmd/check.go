@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 )
 
@@ -11,8 +10,8 @@ var checkCmd = &cobra.Command{
 	Short: "Check documentation freshness and links",
 	Run: func(cmd *cobra.Command, args []string) {
 		// ここにロジックを実装していきます
-		fmt.Println("🔍 Checking documentation freshness...")
-		fmt.Println("✅ All docs are fresh! (Mock)")
+		cmd.Println("🔍 Checking documentation freshness...")
+		cmd.Println("✅ All docs are fresh! (Mock)")
 	},
 }
 
