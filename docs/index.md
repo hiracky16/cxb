@@ -1,0 +1,1 @@
+This document refers to [main.go](../main.go).

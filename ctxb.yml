@@ -1,0 +1,10 @@
+name: 'ctxb-test'
+version: '0.1.0'
+paths:
+  sources: ["docs"]
+  targets: ["."]
+rules:
+  freshness:
+    enabled: true
+    warn_days: 30
+    error_days: 90
