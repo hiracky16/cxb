@@ -75,8 +75,7 @@ It performs the following checks:
 			if issue.Line > 0 {
 				lineInfo = fmt.Sprintf(":%d", issue.Line)
 			}
-			fmt.Printf("[%s] %s%s: %s
-", issue.Severity, issue.File, lineInfo, issue.Message)
+			fmt.Printf("[%s] %s%s: %s\n", issue.Severity, issue.File, lineInfo, issue.Message)
 			if issue.Severity == "ERROR" {
 				hasErrors = true
 			}
@@ -246,14 +245,28 @@ func extractLinks(filePath string) ([]LinkInfo, error) {
 	doc := parser.Parse(text.NewReader(source))
 
 	var links []LinkInfo
+	var nodeStack []ast.Node
+
 	ast.Walk(doc, func(n ast.Node, entering bool) (ast.WalkStatus, error) {
 		if entering {
+			nodeStack = append(nodeStack, n) // Push
 			if link, ok := n.(*ast.Link); ok {
 				dest := string(link.Destination)
 				if !strings.HasPrefix(dest, "http://") && !strings.HasPrefix(dest, "https://") && !strings.HasPrefix(dest, "#") {
-					links = append(links, LinkInfo{Destination: dest, Line: n.Lines().At(0).Start})
+					var line int
+					// Find the parent block node to get the line number.
+					for i := len(nodeStack) - 1; i >= 0; i-- {
+						parent := nodeStack[i]
+						if p, ok := parent.(*ast.TextBlock); ok {
+							line = p.Lines().At(0).Start
+							break
+						}
+					}
+					links = append(links, LinkInfo{Destination: dest, Line: line})
 				}
 			}
+		} else {
+			nodeStack = nodeStack[:len(nodeStack)-1] // Pop
 		}
 		return ast.WalkContinue, nil
 	})
