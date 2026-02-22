@@ -1,15 +1,15 @@
 package cmd
 
 import (
-	"os"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 // rootCmd はベースコマンドです
 var rootCmd = &cobra.Command{
-	Use:   "ctxb",
-	Short: "ctxb is a context builder for AI-native development",
-	Long: `ctxb helps you manage documentation freshness
+	Use:   "cxb",
+	Short: "cxb is a context builder for AI-native development",
+	Long: `cxb helps you manage documentation freshness
 and generate context for Coding Agents.`,
 }
 

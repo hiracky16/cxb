@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const ctxbConfigContent = `name: 'my_project'
+const cxbConfigContent = `name: 'my_project'
 version: '0.1.0'
 
 paths:
@@ -28,25 +28,26 @@ export:
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialize a new ctxb project.",
-	Long: `Initialize a new ctxb project.
-This command creates a ctxb.yml file in the current directory.`,
+	Short: "Initialize a new cxb project.",
+	Long: `Initialize a new cxb project.
+This command creates a cxb.yml file in the current directory.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		filePath := "ctxb.yml"
+		filePath := "cxb.yml"
 		if _, err := os.Stat(filePath); err == nil {
 			return fmt.Errorf("'%s' already exists in the current directory", filePath)
 		} else if !os.IsNotExist(err) {
 			return fmt.Errorf("failed to check for %s: %w", filePath, err)
 		}
 
-		err := os.WriteFile(filePath, []byte(ctxbConfigContent), 0644)
+		err := os.WriteFile(filePath, []byte(cxbConfigContent), 0644)
 		if err != nil {
 			return fmt.Errorf("failed to write to %s: %w", filePath, err)
 		}
 
-		        // Use cmd.OutOrStdout() to print the message, so it can be captured in tests.
-		        cmd.OutOrStdout().Write([]byte(fmt.Sprintf("OK: Created configuration file: %s\n", filePath)))
-		        return nil	},
+		// Use cmd.OutOrStdout() to print the message, so it can be captured in tests.
+		cmd.OutOrStdout().Write([]byte(fmt.Sprintf("OK: Created configuration file: %s\n", filePath)))
+		return nil
+	},
 }
 
 func init() {

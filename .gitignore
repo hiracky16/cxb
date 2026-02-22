@@ -1,7 +1,7 @@
 # --- Go Binaries & Build Artifacts ---
 # ビルドされたバイナリ
-/ctxb
-/ctxb.exe
+/cxb
+/cxb.exe
 
 # テスト生成物など
 *.test
@@ -17,9 +17,9 @@ Thumbs.db
 .idea/
 *.swp
 
-# --- ctxb Generated Files ---
+# --- cxb Generated Files ---
 # 生成されるHTMLレポートは成果物なのでGitに入れない
-ctxb-report.html
+cxb-report.html
 
 # エクスポートされたAI用コンテキスト
 # ※ チームで共有したい場合はここをコメントアウトしてGit管理下に置いてください
@@ -33,3 +33,4 @@ vendor/
 # --- Gemini CLI ---
 .gemini/
 AGENTS.md
+spec/

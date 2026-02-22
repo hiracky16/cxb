@@ -27,7 +27,7 @@ func TestInitCmd(t *testing.T) {
 		rootCmd.AddCommand(originalCommands...)
 	}()
 
-	t.Run("creates ctxb.yml if it does not exist", func(t *testing.T) {
+	t.Run("creates cxb.yml if it does not exist", func(t *testing.T) {
 		// Reset commands for this specific test run
 		rootCmd.ResetCommands()
 		rootCmd.AddCommand(initCmd)
@@ -43,14 +43,14 @@ func TestInitCmd(t *testing.T) {
 		output, err := executeCommand(rootCmd, "init")
 
 		assert.NoError(t, err)
-		assert.Equal(t, "OK: Created configuration file: ctxb.yml\n", output)
+		assert.Equal(t, "OK: Created configuration file: cxb.yml\n", output)
 
-		content, err := os.ReadFile("ctxb.yml")
+		content, err := os.ReadFile("cxb.yml")
 		assert.NoError(t, err)
-		assert.Equal(t, ctxbConfigContent, string(content))
+		assert.Equal(t, cxbConfigContent, string(content))
 	})
 
-	t.Run("returns an error if ctxb.yml already exists", func(t *testing.T) {
+	t.Run("returns an error if cxb.yml already exists", func(t *testing.T) {
 		// Reset commands for this specific test run
 		rootCmd.ResetCommands()
 		rootCmd.AddCommand(initCmd)
@@ -64,12 +64,12 @@ func TestInitCmd(t *testing.T) {
 		}
 		defer os.Chdir(originalWd)
 
-		err = os.WriteFile("ctxb.yml", []byte("dummy content"), 0644)
+		err = os.WriteFile("cxb.yml", []byte("dummy content"), 0644)
 		assert.NoError(t, err)
 
 		_, err = executeCommand(rootCmd, "init")
 
 		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "'ctxb.yml' already exists in the current directory")
+		assert.Contains(t, err.Error(), "'cxb.yml' already exists in the current directory")
 	})
 }
